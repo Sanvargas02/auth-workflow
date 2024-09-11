@@ -1,0 +1,63 @@
+<form (submit)="login()" action="">
+  <div class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="w-full max-w-md bg-white shadow-lg rounded-lg p-6">
+      <div class="space-y-1">
+        <h2 class="text-2xl font-bold text-center">Iniciar sesión</h2>
+        <p class="text-center text-gray-500">
+          Ingresa tus credenciales para acceder a tu cuenta
+        </p>
+      </div>
+
+      <div class="space-y-4 mt-6">
+        <div class="space-y-2">
+          <label for="email" class="block text-sm font-medium text-gray-700">Correo electrónico</label>
+          <input
+            id="email"
+            [(ngModel)]="email"
+            [ngModelOptions]="{standalone: true}"
+            type="email"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md"
+            placeholder="tu@ejemplo.com"
+            required
+          />
+        </div>
+
+        <div class="space-y-2">
+          <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
+          <div class="relative">
+            <input
+              id="password"
+              [(ngModel)]="password"
+              [ngModelOptions]="{standalone: true}"
+              [type]="showPassword ? 'text' : 'password'"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md"
+              placeholder="••••••••"
+              required
+            />
+            <button
+              type="button"
+              class="absolute right-0 top-0 h-full px-3 py-2 text-gray-500"
+              (click)="togglePasswordVisibility()"
+            >
+              <svg *ngIf="showPassword" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.97 0-9-4.03-9-9a8.963 8.963 0 013.243-6.95M21 12c0 4.97-4.03 9-9 9a8.963 8.963 0 01-6.95-3.243m13.325-2.177A10.04 10.04 0 0019 12c0-1.654-.36-3.226-1.025-4.668M3.22 3.22l17.56 17.56" />
+              </svg>
+              <svg *ngIf="!showPassword" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.522 5 12 5c4.478 0 8.268 2.943 9.542 7-.366 1.186-1.072 2.27-2.057 3.13M15 12a3 3 0 01-6 0M9.683 16.319A8.963 8.963 0 0112 19c4.478 0 8.268-2.943 9.542-7-.366-1.186-1.072-2.27-2.057-3.13" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col space-y-4 mt-6">
+        <button class="w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700" type="submit">Iniciar sesión</button>
+        <p class="text-sm text-center text-gray-500">
+          ¿No tienes una cuenta? <a href="#" class="text-blue-600 hover:underline">Regístrate</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</form>
+
