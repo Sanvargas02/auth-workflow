@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
   imports: [
     CommonModule,
     FormsModule,
+    RouterModule,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
