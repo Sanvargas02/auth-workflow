@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 
 @Component({
@@ -10,6 +10,7 @@ import { Router, RouterModule } from '@angular/router';
     CommonModule,
     FormsModule,
     RouterModule,
+    ReactiveFormsModule,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
@@ -18,20 +19,34 @@ import { Router, RouterModule } from '@angular/router';
 export default class LoginComponent {
 
   showPassword = false;
-  email = '';
-  password = '';
+  // email = '';
+  // password = '';
 
 
   constructor(private router: Router) {}
+
+  // # Reactive Forms
+  private fb = inject( FormBuilder );
+
+  public myForm: FormGroup = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+  })
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
 
   login() {
-    // Aquí se integraría la lógica de autenticación, como llamar al servicio de login
-    console.log('Logging in with', this.email, this.password);
-    this.router.navigate(['/dashboard']);
+    if (this.myForm.valid) {
+      // Aquí se integraría la lógica de autenticación, como llamar al servicio de login
+      //console.log( this.myForm.value );
+      const { email, password } = this.myForm.value
+      //console.log('Logging in with', email, password);
+      this.router.navigate(['/dashboard']);
+    } else {
+      console.log('Form not valid')
+    }
   }
 
 }

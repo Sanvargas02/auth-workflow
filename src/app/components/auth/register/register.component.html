@@ -3,31 +3,37 @@
     <h2 class="text-2xl font-bold text-center text-gray-800 mb-2">Crear cuenta</h2>
     <p class="text-center text-gray-600 mb-6">Ingresa tus datos para registrarte</p>
 
-    <form class="space-y-4" (submit)="register()">
+    <form class="space-y-4" [formGroup]="myForm" (ngSubmit)="register()">
       <div>
         <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nombre completo</label>
         <input
           id="name"
-          [(ngModel)]="name"
-          [ngModelOptions]="{standalone: true}"
+          formControlName="name"
           type="text"
           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="Juan Pérez"
           required
         />
+        <!-- Mostrar mensaje de error si el email no es válido -->
+        <div *ngIf="myForm.get('name')?.invalid && myForm.get('name')?.touched" class="text-red-500 text-sm">
+          Se debe colocar un nombre
+        </div>
       </div>
 
       <div>
         <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Correo electrónico</label>
         <input
           id="email"
-          [(ngModel)]="email"
-          [ngModelOptions]="{standalone: true}"
+          formControlName="email"
           type="email"
           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="tu@ejemplo.com"
           required
         />
+        <!-- Mostrar mensaje de error si el email no es válido -->
+        <div *ngIf="myForm.get('email')?.invalid && myForm.get('email')?.touched" class="text-red-500 text-sm">
+          El correo electrónico no es válido
+        </div>
       </div>
 
       <div>
@@ -35,8 +41,7 @@
         <div class="relative">
           <input
             id="password"
-            [(ngModel)]="password"
-            [ngModelOptions]="{standalone: true}"
+            formControlName="password"
             [type]="showPassword ? 'text' : 'password'"
             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="••••••••"
@@ -56,10 +61,15 @@
             </svg>
           </button>
         </div>
+        <!-- Mostrar mensaje de error si la contraseña no es válida -->
+        <div *ngIf="myForm.get('password')?.invalid && myForm.get('password')?.touched" class="text-red-500 text-sm">
+          La contraseña debe tener al menos 6 caracteres
+        </div>
       </div>
 
       <button
         type="submit"
+        [disabled]="myForm.invalid"
         class="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
       >
         Registrarse
