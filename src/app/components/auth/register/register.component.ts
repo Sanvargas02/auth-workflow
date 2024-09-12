@@ -30,6 +30,7 @@ export default class RegisterComponent {
   register() {
     // Aquí puedes integrar la lógica de registro, por ejemplo, llamar a un servicio para el registro
     console.log('Registering with', this.name, this.email, this.password);
+    this.router.navigate(['/confirmation']);
   }
 
  }

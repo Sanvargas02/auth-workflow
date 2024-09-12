@@ -24,6 +24,10 @@ export const routes: Routes = [
     loadComponent: () => import('./components/auth/register/register.component'),
   },
   {
+    path: 'confirmation',
+    loadComponent: () => import('./components/auth/confirmation/confirmation.component'),
+  },
+  {
     path: 'dashboard',
     loadComponent: () => import('./components/dashboard/dashboard.component'),
     canActivate: [authGuard]
