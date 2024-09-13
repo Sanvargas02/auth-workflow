@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
+//import { HttpClientModule } from '@angular/common/http'; Its Deprecated
 
 @Component({
   selector: 'app-login',
@@ -11,6 +13,7 @@ import { Router, RouterModule } from '@angular/router';
     FormsModule,
     RouterModule,
     ReactiveFormsModule,
+    //HttpClientModule,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
