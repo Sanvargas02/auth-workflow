@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 //import { HttpClientModule } from '@angular/common/http'; Its Deprecated
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -21,19 +22,21 @@ import { AuthService } from '../../../services/auth.service';
 })
 export default class LoginComponent {
 
-  private showPassword = false;
-  // email = '';
-  // password = '';
-
-
-  constructor(private router: Router) {}
+  public showPassword = false;
 
   // # Reactive Forms
   private fb = inject( FormBuilder );
 
+  // # AuthService
+  private authService = inject(AuthService);
+
+
+  constructor(private router: Router) {}
+
+
   public myForm: FormGroup = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(6)]],
+    email: ['santiago@gmail.com', [Validators.required, Validators.email]],
+    password: ['123456', [Validators.required, Validators.minLength(6)]],
   })
 
   togglePasswordVisibility() {
@@ -42,11 +45,18 @@ export default class LoginComponent {
 
   login() {
     if (this.myForm.valid) {
-      // Aquí se integraría la lógica de autenticación, como llamar al servicio de login
-      //console.log( this.myForm.value );
       const { email, password } = this.myForm.value
-      //console.log('Logging in with', email, password);
-      this.router.navigate(['/dashboard']);
+
+      this.authService.login( email, password )
+        .subscribe( {
+          next: () => this.router.navigateByUrl('/dashboard'),
+          error: (message) => {
+            Swal.fire('Error', message, 'error'); //Alert
+          },
+
+        } )
+
+      //this.router.navigate(['/dashboard']);
     } else {
       console.log('Form not valid')
     }
