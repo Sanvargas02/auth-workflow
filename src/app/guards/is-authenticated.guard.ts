@@ -16,6 +16,12 @@ export const isAuthenticatedGuard: CanActivateFn = (route, state) => {
     return true
   }
 
+  //this is if we do not know if we are authenticated or not, is our first enters to the app
+  //And solve the problem of the load the screen
+  // if ( authService.authStatus() === AuthStatus.checking ) {
+  //   return false
+  // }
+
   // const url = state.url;
   // localStorage.setItem('url', url);
   router.navigateByUrl('/login');

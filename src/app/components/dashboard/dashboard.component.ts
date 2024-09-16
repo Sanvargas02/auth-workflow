@@ -26,10 +26,9 @@ export default class DashboardComponent {
   // }
 
   handleLogout() {
-    // Aquí iría la lógica para cerrar sesión
-    localStorage.removeItem('authToken'); // Elimina el token de autenticación
 
-    // Redirige al usuario a la página de inicio de sesión
+    this.authService.logout();
+
     this.router.navigate(['/login']);
   }
 
